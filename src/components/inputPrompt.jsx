@@ -82,7 +82,7 @@ function WorkForm({work}) {
     }
 
     function handleCancel() {
-        
+        setUnitCreation(false)
     }
 
     function handleSubmit() {
@@ -90,7 +90,7 @@ function WorkForm({work}) {
     }
     return (
         <>
-        {unitCreationDisplay && <UnitCreation workId={workId} />}
+        {unitCreationDisplay && <UnitCreation workId={workId} cancelCallback={handleCancel}/>}
         <h2>Work Information</h2>
         <div className="work-header">
             <h3>Experience:</h3>
@@ -107,7 +107,7 @@ function WorkForm({work}) {
     )
 }
 
-function UnitCreation({workId}) {
+function UnitCreation({workId, cancelCallback, submitCallback}) {
     return (
         <div className="unit-div">
             <h3 className="grid-wide">Add work experience</h3>
@@ -117,8 +117,8 @@ function UnitCreation({workId}) {
             <label htmlFor={`${workId}-work-desc`}>Job description: </label>
             <textarea name={`${workId}-work-desc`} id={`${workId}-work-desc`}></textarea>
             <div className="buttons-div">
-                <button className="cancel">Cancel</button>
-                <button className="submit">Submit</button>
+                <button onClick={cancelCallback} className="cancel">Cancel</button>
+                <button onClick={submitCallback} className="submit">Submit</button>
             </div>
         </div>
     )
