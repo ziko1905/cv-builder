@@ -110,14 +110,15 @@ function WorkForm({work}) {
 function UnitCreation({workId}) {
     return (
         <div className="unit-div">
-            <InputAndLabel label={"Company name: "} name={`${workId}-work-company`} id={`${workId}-company`}/>
-            <InputAndLabel label={"Position in company: "} name={`${workId}-work-position`} id={`${workId}-position`}/>
-            <InputAndLabel label={"Employment time(in months): "} name={`${workId}-work-time`} id={`${workId}-time`}/>
+            <h3 className="grid-wide">Add work experience</h3>
+            <InputAndLabel divide={true} label={"Company name: "} name={`${workId}-work-company`} id={`${workId}-company`}/>
+            <InputAndLabel divide={true} label={"Position in company: "} name={`${workId}-work-position`} id={`${workId}-position`}/>
+            <InputAndLabel divide={true} label={"Employment time(in months): "} name={`${workId}-work-time`} id={`${workId}-time`}/>
             <label htmlFor={`${workId}-work-desc`}>Job description: </label>
             <textarea name={`${workId}-work-desc`} id={`${workId}-work-desc`}></textarea>
             <div className="buttons-div">
-                <button className="cancel-button">Cancel</button>
-                <button className="submit-button">Submit</button>
+                <button className="cancel">Cancel</button>
+                <button className="submit">Submit</button>
             </div>
         </div>
     )
