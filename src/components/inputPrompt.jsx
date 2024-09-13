@@ -116,11 +116,7 @@ function WorkForm({callBacks, values}) {
                 <div onClick={handleAdding} className="add-button-div"><button className="add-button">Add Experience</button></div>
             </div>
             <div className="experience-div">
-                <WorkUnit company={"Meta"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
-                <WorkUnit company={"Netflix"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
-                <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
-                <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
-                <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+                {Object.values(values.work).map((value, key) => <WorkUnit key={key} {...value}/>)}
             </div>
         </>
     )
@@ -132,9 +128,9 @@ function UnitCreation({cancelCallback, submitCallback}) {
             <h3 className="grid-wide">Add work experience</h3>
             <InputAndLabel divide={true} label={"Company name: "} name={`company`} id={`company`}/>
             <InputAndLabel divide={true} label={"Position in company: "} name={`position`} id={`position`}/>
-            <InputAndLabel divide={true} label={"Employment time(in months): "} name={`work-time`} id={`work-time`}/>
-            <label htmlFor={`work-desc`}>Job description: </label>
-            <textarea name={`work-desc`} id={`work-desc`}></textarea>
+            <InputAndLabel divide={true} label={"Employment time(in months): "} name={`workTime`} id={`work-time`}/>
+            <label htmlFor={`workDesc`}>Job description: </label>
+            <textarea name={`workDesc`} id={`work-desc`}></textarea>
             <div className="buttons-div">
                 <button onClick={cancelCallback} className="cancel">Cancel</button>
                 <button type="submit" className="submit">Submit</button>
@@ -143,12 +139,12 @@ function UnitCreation({cancelCallback, submitCallback}) {
     )
 }
 
-function WorkUnit({company, position, length, description}) {
+function WorkUnit({company, position, workTime, workDesc}) {
     return (
         <div className="work-unit">
             <h4>{company}</h4>
-            <h6>{position}, {length}</h6>
-            {!!description && <p>{description}</p>}
+            <h6>{position}, {workTime}</h6>
+            {!!workDesc && <p>{workDesc}</p>}
         </div>
     )
 }

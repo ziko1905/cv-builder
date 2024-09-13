@@ -1,5 +1,6 @@
 .input-prompt {
   display: grid;
+  grid-template-rows: auto auto 1fr;
   justify-items: center;
   align-content: start;
   gap: 1rem;
@@ -129,6 +130,7 @@ button:active {
 .experience-div {
   min-width: 80%;
   display: grid;
+  align-self: start;
   gap: 1rem 0;
   overflow: auto;
   max-height: 65%;
