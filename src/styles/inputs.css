@@ -130,6 +130,7 @@ button:active {
 }
 
 .unit-div {
+  position: absolute;
   grid-column: 1 / -1;
   background-color: cadetblue;
 }

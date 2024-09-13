@@ -73,12 +73,28 @@ function EductionForm({onChange, values}) {
 }
 
 function WorkForm({work}) {
+    const [unitCreationDisplay, setUnitCreation] = useState(false)
+    const [workId, setWorkId] = useState(-1)
+
+    function handleAdding() {
+        setUnitCreation(true)
+        setWorkId(workId+1)
+    }
+
+    function handleCancel() {
+        
+    }
+
+    function handleSubmit() {
+
+    }
     return (
         <>
+        {unitCreationDisplay && <UnitCreation workId={workId} />}
         <h2>Work Information</h2>
         <div className="work-header">
             <h3>Experience:</h3>
-            <div className="add-button-div"><button className="add-button">Add Experience</button></div>
+            <div onClick={handleAdding} className="add-button-div"><button className="add-button">Add Experience</button></div>
         </div>
         <div className="experience-div">
             <WorkUnit company={"Meta"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
@@ -88,6 +104,32 @@ function WorkForm({work}) {
             <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
         </div>
         </>
+    )
+}
+
+function UnitCreation({workId}) {
+    return (
+        <div className="unit-div">
+            <InputAndLabel label={"Company name: "} name={`${workId}-work-company`} id={`${workId}-company`}/>
+            <InputAndLabel label={"Position in company: "} name={`${workId}-work-position`} id={`${workId}-position`}/>
+            <InputAndLabel label={"Employment time(in months): "} name={`${workId}-work-time`} id={`${workId}-time`}/>
+            <label htmlFor={`${workId}-work-desc`}>Job description: </label>
+            <textarea name={`${workId}-work-desc`} id={`${workId}-work-desc`}></textarea>
+            <div className="buttons-div">
+                <button className="cancel-button">Cancel</button>
+                <button className="submit-button">Submit</button>
+            </div>
+        </div>
+    )
+}
+
+function WorkUnit({company, position, length, description}) {
+    return (
+        <div className="work-unit">
+            <h4>{company}</h4>
+            <h6>{position}, {length}</h6>
+            {!!description && <p>{description}</p>}
+        </div>
     )
 }
 
@@ -107,23 +149,5 @@ function LabelInput({id, type, name, label, onChange, chlClassName, min, max, va
             {label && <label className={chlClassName} htmlFor={id}>{label}</label>}
             <input onChange={onChange} value={value} className={chlClassName} type={type} name={name} id={id} min={min} max={max}/>
         </>
-    )
-}
-
-function UnitCreation() {
-    return (
-        <div className="unit-div">
-            UnitCreation
-        </div>
-    )
-}
-
-function WorkUnit({company, position, length, description}) {
-    return (
-        <div className="work-unit">
-            <h4>{company}</h4>
-            <h6>{position}, {length}</h6>
-            {!!description && <p>{description}</p>}
-        </div>
     )
 }
