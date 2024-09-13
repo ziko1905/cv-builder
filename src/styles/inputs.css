@@ -2,10 +2,14 @@
   display: grid;
   justify-content: center;
   justify-items: center;
+
+  min-height: 35rem;
+  margin-top: 10vh;
 }
 
 .creation-input {
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   border: 5px solid mediumseagreen;
   border-top-width: 15px;
   border-radius: 20px;

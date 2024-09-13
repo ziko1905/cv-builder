@@ -2,9 +2,32 @@ import { useState } from "react";
 import "../styles/inputs.css"
 
 export function CreationInput() {
+    const processes = ["general", "education"]
+    const [processId, setProcessId] = useState(0);
+    const process = processes[processId]
+
+    function handlePrevProcess() {
+        if (processId > 0) setProcessId(processId - 1)
+    }
+
+    function handleNextProcess() {
+        if (processId < processes.length - 1) setProcessId(processId + 1)
+    }
+
+    function handleSubmit() {
+
+    }
+
     return (
         <div className={["input-prompt", "creation-input"].join(" ")}>
-            <GeneralForm />
+            {process === "general" && <GeneralForm />}
+            {process === "education" && <EductionForm />}
+            <div className="buttons-div">
+                <button onClick={handlePrevProcess}>Prev</button>
+                {processId < processes.length - 1 
+                    ? <button onClick={handleNextProcess}>Next</button>
+                    : <button onClick={handleSubmit}>Submit</button>}
+            </div>
         </div>
     )
 }
@@ -20,6 +43,22 @@ function GeneralForm() {
                 <InputAndLabel className={"grid-wide"} label={"Email: "} type="email" id="email" name="useremail"/>
                 <InputAndLabel className={"grid-wide"} label={"Phone Number: "} type="number" id="phone" name="userphone"/>
             </form>
+        </>
+    )
+}
+
+function EductionForm() {
+    return (
+        <>
+        <h2>Education Information</h2>
+        <form action="">
+            <InputAndLabel label={"School name"} id={"schoolname"} name={"userschoolname"}/>
+            <InputAndLabel label={"Title"} id={"title"} name={"usertitle"}/>
+            <div>
+                <InputAndLabel label={"Studying started(year): "} id={"studystart"} name={"userstudystart"}/>
+                <InputAndLabel label={"Ended(year): "} id={"studyend"} name={"userstudyend"}/>
+            </div>
+        </form>
         </>
     )
 }
