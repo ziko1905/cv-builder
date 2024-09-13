@@ -75,16 +75,20 @@ function EductionForm({onChange, values}) {
 }
 
 function InputAndLabel({id, type='text', name, label, className="", onChange, chlClassName, divide=false, min, max, value}) {
-    const LabelInput = () => <>
-        {label && <label className={chlClassName} htmlFor={id}>{label}</label>}
-        <input onChange={onChange} value={value} className={chlClassName} type={type} name={name} id={id} min={min} max={max}/>
-    </>
-
     return !divide ? (
         <div className={className + " " + "input-div"}>
-            <LabelInput />
+            <LabelInput id={id} type={type} name={name} label={label} onChange={onChange} chlClassName={chlClassName} min={min} max={max} value={value}/>
         </div>
     ) : (
-        <LabelInput />
+        <LabelInput id={id} type={type} name={name} label={label} onChange={onChange} chlClassName={chlClassName} min={min} max={max} value={value}/>
+    )
+}
+
+function LabelInput({id, type, name, label, onChange, chlClassName, min, max, value}) {
+    return (
+        <>
+            {label && <label className={chlClassName} htmlFor={id}>{label}</label>}
+            <input onChange={onChange} value={value} className={chlClassName} type={type} name={name} id={id} min={min} max={max}/>
+        </>
     )
 }
