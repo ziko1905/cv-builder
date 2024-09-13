@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "../styles/inputs.css"
+import { getYearFromMonths } from "../general";
 
 export function CreationInput() {
     const [values, setValues] = useState({firstname: "", lastname: "", birthdate: "", email: "", phone: "", shoolname: "", title: "", studystart: "", studyend: "", work: {}})
     const processes = [GeneralForm, EductionForm, WorkForm]
-    const callBacks = [{onChange: handleValues}, {onChange: handleValues}, {submitCallback: handleSubmit}]
+    const callBacks = [{onChange: handleValues}, {onChange: handleValues}, {submitCallback: handleWorkSubmit}]
     const [processId, setProcessId] = useState(0);
     const CurrFrom = processes[processId]
     const currCallback = callBacks[processId]
@@ -24,10 +25,17 @@ export function CreationInput() {
         if (processId < processes.length - 1) setProcessId(processId + 1)
     }
 
-    function handleSubmit(work) {
+    function handleWorkSubmit(e, work) {
+        e.preventDefault()
         console.log("Submitting...")
         const newValues = {...values}
         newValues.work = work
+        console.log(newValues)
+        setValues(newValues)
+    }
+
+    function handleSubmit() {
+
     }
 
     return (
@@ -79,6 +87,7 @@ function EductionForm({callBacks, values}) {
 function WorkForm({callBacks, values}) {
     const [unitCreationDisplay, setUnitCreation] = useState(false)
     const [workId, setWorkId] = useState(-1)
+    const experiences = values.work;
 
     function handleAdding() {
         setUnitCreation(true)
@@ -89,9 +98,18 @@ function WorkForm({callBacks, values}) {
         setUnitCreation(false)
     }
 
+    function handleSubmit(e, callBack) {
+        e.preventDefault()
+        const formData = Object.fromEntries(new FormData(e.target))
+        formData["work-time"] = getYearFromMonths(formData["work-time"]) 
+        experiences[workId] = formData;
+        callBack(e, experiences)
+        handleCancel()
+    }
+
     return (
         <>
-            {unitCreationDisplay && <UnitCreation workId={workId} {...callBacks} cancelCallback={handleCancel}/>}
+            {unitCreationDisplay && <UnitCreation workId={workId} submitCallback={(e) => handleSubmit(e, callBacks.submitCallback)} cancelCallback={handleCancel}/>}
             <h2>Work Information</h2>
             <div className="work-header">
                 <h3>Experience:</h3>
@@ -108,20 +126,20 @@ function WorkForm({callBacks, values}) {
     )
 }
 
-function UnitCreation({workId, cancelCallback, submitCallback}) {
+function UnitCreation({cancelCallback, submitCallback}) {
     return (
-        <div className="unit-div">
+        <form onSubmit={submitCallback} className="unit-div">
             <h3 className="grid-wide">Add work experience</h3>
-            <InputAndLabel divide={true} label={"Company name: "} name={`${workId}-work-company`} id={`${workId}-company`}/>
-            <InputAndLabel divide={true} label={"Position in company: "} name={`${workId}-work-position`} id={`${workId}-position`}/>
-            <InputAndLabel divide={true} label={"Employment time(in months): "} name={`${workId}-work-time`} id={`${workId}-time`}/>
-            <label htmlFor={`${workId}-work-desc`}>Job description: </label>
-            <textarea name={`${workId}-work-desc`} id={`${workId}-work-desc`}></textarea>
+            <InputAndLabel divide={true} label={"Company name: "} name={`company`} id={`company`}/>
+            <InputAndLabel divide={true} label={"Position in company: "} name={`position`} id={`position`}/>
+            <InputAndLabel divide={true} label={"Employment time(in months): "} name={`work-time`} id={`work-time`}/>
+            <label htmlFor={`work-desc`}>Job description: </label>
+            <textarea name={`work-desc`} id={`work-desc`}></textarea>
             <div className="buttons-div">
                 <button onClick={cancelCallback} className="cancel">Cancel</button>
-                <button onClick={submitCallback} className="submit">Submit</button>
+                <button type="submit" className="submit">Submit</button>
             </div>
-        </div>
+        </form>
     )
 }
 
