@@ -118,6 +118,7 @@ button:active {
   min-width: 80%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 1rem 0;
 }
 
 .unit-div {
@@ -125,11 +126,30 @@ button:active {
   background-color: cadetblue;
 }
 
-.add-button {
-}
-
 .add-button-div {
   display: flex;
   justify-self: end;
   align-items: end;
+}
+
+.work-unit {
+  background-color: #dbdbdb;
+  padding: 0.7rem;
+  grid-column: 1 / -1;
+  border: 1px solid #9d9d9d;
+  border-radius: 1rem;
+  border-left: 6px solid #9d9d9d;
+  border-bottom: 6px solid #9d9d9d;
+}
+
+.work-unit h4,
+.work-unit h6,
+.work-unit p {
+  /* font-size: 1em; */
+  margin: 0;
+}
+
+.work-unit h6,
+.work-unit p {
+  font-size: 0.8em;
 }

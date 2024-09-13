@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/inputs.css"
 
 export function CreationInput() {
-    const [values, setValues] = useState({firstname: "", lastname: "", birthdate: "", email: "", phone: "", shoolname: "", title: "", studystart: "", studyend: "",})
+    const [values, setValues] = useState({firstname: "", lastname: "", birthdate: "", email: "", phone: "", shoolname: "", title: "", studystart: "", studyend: "", work: {}})
     const processes = [GeneralForm, EductionForm, WorkForm]
     const [processId, setProcessId] = useState(0);
     const CurrFrom = processes[processId]
@@ -72,16 +72,14 @@ function EductionForm({onChange, values}) {
     )
 }
 
-function WorkForm() {
+function WorkForm({work}) {
     return (
         <>
         <h2>Work Information</h2>
         <div className="experience-div">
             <h3>Experience:</h3>
             <div className="add-button-div"><button className="add-button">Add Experience</button></div>
-            <UnitCreation />
-            <UnitCreation />
-            <UnitCreation />
+            <WorkUnit company={"Meta"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
         </div>
         </>
     )
@@ -110,6 +108,16 @@ function UnitCreation() {
     return (
         <div className="unit-div">
             UnitCreation
+        </div>
+    )
+}
+
+function WorkUnit({company, position, length, description}) {
+    return (
+        <div className="work-unit">
+            <h4>{company}</h4>
+            <h6>{position}, {length}</h6>
+            {!!description && <p>{description}</p>}
         </div>
     )
 }
