@@ -76,10 +76,16 @@ function WorkForm({work}) {
     return (
         <>
         <h2>Work Information</h2>
-        <div className="experience-div">
+        <div className="work-header">
             <h3>Experience:</h3>
             <div className="add-button-div"><button className="add-button">Add Experience</button></div>
+        </div>
+        <div className="experience-div">
             <WorkUnit company={"Meta"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+            <WorkUnit company={"Netflix"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+            <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+            <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+            <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
         </div>
         </>
     )

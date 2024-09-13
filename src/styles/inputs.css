@@ -6,6 +6,7 @@
 
   position: relative;
   min-height: 35rem;
+  max-height: 35rem;
   margin-top: 10vh;
 }
 
@@ -114,11 +115,18 @@ button:active {
   max-width: 6.5ch;
 }
 
+.work-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-width: 70%;
+}
+
 .experience-div {
   min-width: 80%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 1rem 0;
+  overflow: auto;
+  max-height: 65%;
 }
 
 .unit-div {
