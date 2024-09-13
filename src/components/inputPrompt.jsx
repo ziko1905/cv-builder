@@ -4,8 +4,10 @@ import "../styles/inputs.css"
 export function CreationInput() {
     const [values, setValues] = useState({firstname: "", lastname: "", birthdate: "", email: "", phone: "", shoolname: "", title: "", studystart: "", studyend: "", work: {}})
     const processes = [GeneralForm, EductionForm, WorkForm]
+    const callBacks = [{onChange: handleValues}, {onChange: handleValues}, {submitCallback: handleSubmit}]
     const [processId, setProcessId] = useState(0);
     const CurrFrom = processes[processId]
+    const currCallback = callBacks[processId]
 
     function handleValues(e) {
         let chgVal = e.target.id
@@ -22,13 +24,15 @@ export function CreationInput() {
         if (processId < processes.length - 1) setProcessId(processId + 1)
     }
 
-    function handleSubmit() {
-
+    function handleSubmit(work) {
+        console.log("Submitting...")
+        const newValues = {...values}
+        newValues.work = work
     }
 
     return (
         <div className={["input-prompt", "creation-input"].join(" ")}>
-            <CurrFrom onChange={handleValues} values={values}/>
+            <CurrFrom callBacks={currCallback} values={values}/>
             <div className="buttons-div">
                 <button onClick={handlePrevProcess}>Prev</button>
                 {processId < processes.length - 1 
@@ -39,40 +43,40 @@ export function CreationInput() {
     )
 }
 
-function GeneralForm({onChange, values}) {
+function GeneralForm({callBacks, values}) {
 
     return (
         <>
             <h2>General Information</h2>
             <form action="">
-                <InputAndLabel onChange={onChange} value={values.firstname} label={"First Name: "} id="firstname" name="user-first-name"/>
-                <InputAndLabel onChange={onChange} value={values.lastname} label={"Last Name: "} id="lastname" name="userlastname"/>
-                <InputAndLabel onChange={onChange} value={values.birthdate} chlClassName={"grid-wide"} divide={true} label={"Date of birth: "} type="date" id="birthdate" name="userbirthdate"/>
-                <InputAndLabel onChange={onChange} value={values.email} className={"grid-wide"} label={"Email: "} type="email" id="email" name="useremail"/>
-                <InputAndLabel onChange={onChange} value={values.phone} className={"grid-wide"} label={"Phone Number: "} type="number" id="phone" name="userphone"/>
+                <InputAndLabel {...callBacks} value={values.firstname} label={"First Name: "} id="firstname" name="user-first-name"/>
+                <InputAndLabel {...callBacks} value={values.lastname} label={"Last Name: "} id="lastname" name="userlastname"/>
+                <InputAndLabel {...callBacks} value={values.birthdate} chlClassName={"grid-wide"} divide={true} label={"Date of birth: "} type="date" id="birthdate" name="userbirthdate"/>
+                <InputAndLabel {...callBacks} value={values.email} className={"grid-wide"} label={"Email: "} type="email" id="email" name="useremail"/>
+                <InputAndLabel {...callBacks} value={values.phone} className={"grid-wide"} label={"Phone Number: "} type="number" id="phone" name="userphone"/>
             </form>
         </>
     )
 }
 
-function EductionForm({onChange, values}) {
+function EductionForm({callBacks, values}) {
     const date = new Date()
     return (
         <>
         <h2>Education Information</h2>
         <form className="edu-form" action="">
-            <InputAndLabel onChange={onChange} value={values.schoolname} label={"School name: "} id={"schoolname"} name={"userschoolname"}/>
-            <InputAndLabel onChange={onChange} value={values.title} label={"Title: "} id={"title"} name={"usertitle"}/>
+            <InputAndLabel {...callBacks} value={values.schoolname} label={"School name: "} id={"schoolname"} name={"userschoolname"}/>
+            <InputAndLabel {...callBacks} value={values.title} label={"Title: "} id={"title"} name={"usertitle"}/>
             <div className="study-years-div">
-                <InputAndLabel onChange={onChange} value={values.studystart} min={"1900"} max={date.getFullYear()} type="number" label={"Studying started(year): "} id={"studystart"} name={"userstudystart"}/>
-                <InputAndLabel onChange={onChange} value={values.studyend} min={"1900"} max={date.getFullYear()} type="number" label={"Ended(year): "} id={"studyend"} name={"userstudyend"}/>
+                <InputAndLabel {...callBacks} value={values.studystart} min={"1900"} max={date.getFullYear()} type="number" label={"Studying started(year): "} id={"studystart"} name={"userstudystart"}/>
+                <InputAndLabel {...callBacks} value={values.studyend} min={"1900"} max={date.getFullYear()} type="number" label={"Ended(year): "} id={"studyend"} name={"userstudyend"}/>
             </div>
         </form>
         </>
     )
 }
 
-function WorkForm({work}) {
+function WorkForm({callBacks, values}) {
     const [unitCreationDisplay, setUnitCreation] = useState(false)
     const [workId, setWorkId] = useState(-1)
 
@@ -85,24 +89,21 @@ function WorkForm({work}) {
         setUnitCreation(false)
     }
 
-    function handleSubmit() {
-
-    }
     return (
         <>
-        {unitCreationDisplay && <UnitCreation workId={workId} cancelCallback={handleCancel}/>}
-        <h2>Work Information</h2>
-        <div className="work-header">
-            <h3>Experience:</h3>
-            <div onClick={handleAdding} className="add-button-div"><button className="add-button">Add Experience</button></div>
-        </div>
-        <div className="experience-div">
-            <WorkUnit company={"Meta"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
-            <WorkUnit company={"Netflix"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
-            <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
-            <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
-            <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
-        </div>
+            {unitCreationDisplay && <UnitCreation workId={workId} {...callBacks} cancelCallback={handleCancel}/>}
+            <h2>Work Information</h2>
+            <div className="work-header">
+                <h3>Experience:</h3>
+                <div onClick={handleAdding} className="add-button-div"><button className="add-button">Add Experience</button></div>
+            </div>
+            <div className="experience-div">
+                <WorkUnit company={"Meta"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+                <WorkUnit company={"Netflix"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+                <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+                <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+                <WorkUnit company={"Google"} position={"Junior Software Engineer"} length={36} description={"Pleasant Experience"}/>
+            </div>
         </>
     )
 }
