@@ -3,10 +3,9 @@ import "../styles/inputs.css"
 
 export function CreationInput() {
     const [values, setValues] = useState({firstname: "", lastname: "", birthdate: "", email: "", phone: "", shoolname: "", title: "", studystart: "", studyend: "",})
-
-    const processes = ["general", "education"]
+    const processes = [GeneralForm, EductionForm, WorkForm]
     const [processId, setProcessId] = useState(0);
-    const process = processes[processId]
+    const CurrFrom = processes[processId]
 
     function handleValues(e) {
         let chgVal = e.target.id
@@ -29,8 +28,7 @@ export function CreationInput() {
 
     return (
         <div className={["input-prompt", "creation-input"].join(" ")}>
-            {process === "general" && <GeneralForm onChange={handleValues} values={values} />}
-            {process === "education" && <EductionForm onChange={handleValues} values={values} />}
+            <CurrFrom onChange={handleValues} values={values}/>
             <div className="buttons-div">
                 <button onClick={handlePrevProcess}>Prev</button>
                 {processId < processes.length - 1 
@@ -74,6 +72,21 @@ function EductionForm({onChange, values}) {
     )
 }
 
+function WorkForm() {
+    return (
+        <>
+        <h2>Work Information</h2>
+        <div className="experience-div">
+            <h3>Experience:</h3>
+            <div className="add-button-div"><button className="add-button">Add Experience</button></div>
+            <UnitCreation />
+            <UnitCreation />
+            <UnitCreation />
+        </div>
+        </>
+    )
+}
+
 function InputAndLabel({id, type='text', name, label, className="", onChange, chlClassName, divide=false, min, max, value}) {
     return !divide ? (
         <div className={className + " " + "input-div"}>
@@ -90,5 +103,13 @@ function LabelInput({id, type, name, label, onChange, chlClassName, min, max, va
             {label && <label className={chlClassName} htmlFor={id}>{label}</label>}
             <input onChange={onChange} value={value} className={chlClassName} type={type} name={name} id={id} min={min} max={max}/>
         </>
+    )
+}
+
+function UnitCreation() {
+    return (
+        <div className="unit-div">
+            UnitCreation
+        </div>
     )
 }

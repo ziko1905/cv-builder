@@ -1,6 +1,5 @@
 .input-prompt {
   display: grid;
-  justify-content: center;
   justify-items: center;
   align-content: start;
   gap: 1rem;
@@ -78,7 +77,7 @@ input.justify-mid {
   font-size: 1.3rem;
 }
 
-.buttons-div button {
+button {
   border: none;
   background-color: rgb(92, 157, 255);
   border-bottom: 4px solid rgb(59, 103, 168);
@@ -86,18 +85,20 @@ input.justify-mid {
   border-radius: 0.5rem;
 }
 
-.buttons-div button:active {
+button:active {
   background-color: rgb(59, 103, 168);
   border-bottom: none;
   align-self: flex-end;
 }
 
-.buttons-div button.submit {
+.buttons-div button.submit,
+.add-button {
   background-color: rgb(72, 187, 72);
   border-bottom-color: rgb(52, 134, 52);
 }
 
-.buttons-div button.submit:active {
+.buttons-div button.submit:active,
+.add-button:active {
   background-color: rgb(52, 134, 52);
   border-bottom: none;
 }
@@ -111,4 +112,24 @@ input.justify-mid {
 
 .study-years-div input {
   max-width: 6.5ch;
+}
+
+.experience-div {
+  min-width: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.unit-div {
+  grid-column: 1 / -1;
+  background-color: cadetblue;
+}
+
+.add-button {
+}
+
+.add-button-div {
+  display: flex;
+  justify-self: end;
+  align-items: end;
 }
