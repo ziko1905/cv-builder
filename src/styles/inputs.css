@@ -1,7 +1,59 @@
+.input-prompt {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+
 .creation-input {
   margin: auto;
   border: 5px solid mediumseagreen;
   border-top-width: 15px;
   border-radius: 20px;
-  max-width: 700px;
+  max-width: 50rem;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  gap: 1rem;
+
+  font-size: 1.7rem;
+}
+
+label {
+  justify-self: center;
+}
+
+input {
+  font-size: inherit;
+  max-width: 14rem;
+}
+
+input and :not(.input-div input) {
+  min-width: 2rem;
+  justify-self: center;
+}
+
+.input-div {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+
+.input-div label {
+  text-wrap: nowrap;
+}
+
+.grid-wide {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+label.justify-mid {
+  justify-self: end;
+}
+
+input.justify-mid {
+  justify-self: start;
 }

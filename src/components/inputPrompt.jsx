@@ -3,7 +3,7 @@ import "../styles/inputs.css"
 
 export function CreationInput() {
     return (
-        <div className="creation-input">
+        <div className={["input-prompt", "creation-input"].join(" ")}>
             <GeneralForm />
         </div>
     )
@@ -16,21 +16,25 @@ function GeneralForm() {
             <form action="">
                 <InputAndLabel label={"First Name: "} id="firstname" name="user-first-name"/>
                 <InputAndLabel label={"Last Name: "} id="lastname" name="userlastname"/>
-                <InputAndLabel label={"Date of birth: "} id="birthdate" name="userbirthdate"/>
-                <InputAndLabel label={"Email: "} type="email" id="email" name="useremail"/>
-                <InputAndLabel label={"Phone Number: "} type="number" id="phone" name="userphone"/>
+                <InputAndLabel chlClassName={"grid-wide"} divide={true} label={"Date of birth: "} type="date" id="birthdate" name="userbirthdate"/>
+                <InputAndLabel className={"grid-wide"} label={"Email: "} type="email" id="email" name="useremail"/>
+                <InputAndLabel className={"grid-wide"} label={"Phone Number: "} type="number" id="phone" name="userphone"/>
             </form>
         </>
     )
 }
 
-function InputAndLabel({id, type='text', name, label, className}) {
-    return (
-        <>
-            <div className={className}>
-                {label && <label htmlFor={id}>{label}</label>}
-                <input type={type} name={name} id={id}/>
-            </div>
-        </>
+function InputAndLabel({id, type='text', name, label, className="", chlClassName, divide=false}) {
+    const LabelInput = () => <>
+        {label && <label className={chlClassName} htmlFor={id}>{label}</label>}
+        <input className={chlClassName} type={type} name={name} id={id}/>
+    </>
+
+    return !divide ? (
+        <div className={className + " " + "input-div"}>
+            <LabelInput />
+        </div>
+    ) : (
+        <LabelInput />
     )
 }
