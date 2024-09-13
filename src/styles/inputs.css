@@ -2,7 +2,10 @@
   display: grid;
   justify-content: center;
   justify-items: center;
+  align-content: start;
+  gap: 1rem;
 
+  position: relative;
   min-height: 35rem;
   margin-top: 10vh;
 }
@@ -23,6 +26,10 @@ form {
   gap: 1rem;
 
   font-size: 1.7rem;
+}
+
+form.edu-form {
+  grid-template-columns: 1fr;
 }
 
 label {
@@ -60,4 +67,48 @@ label.justify-mid {
 
 input.justify-mid {
   justify-self: start;
+}
+
+.buttons-div {
+  position: absolute;
+  display: flex;
+  gap: 1rem;
+  right: 2rem;
+  bottom: 2rem;
+  font-size: 1.3rem;
+}
+
+.buttons-div button {
+  border: none;
+  background-color: rgb(92, 157, 255);
+  border-bottom: 4px solid rgb(59, 103, 168);
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+}
+
+.buttons-div button:active {
+  background-color: rgb(59, 103, 168);
+  border-bottom: none;
+  align-self: flex-end;
+}
+
+.buttons-div button.submit {
+  background-color: rgb(72, 187, 72);
+  border-bottom-color: rgb(52, 134, 52);
+}
+
+.buttons-div button.submit:active {
+  background-color: rgb(52, 134, 52);
+  border-bottom: none;
+}
+
+.study-years-div {
+  display: flex;
+  font-size: 0.7em;
+  flex-wrap: nowrap;
+  gap: 2rem;
+}
+
+.study-years-div input {
+  max-width: 6.5ch;
 }

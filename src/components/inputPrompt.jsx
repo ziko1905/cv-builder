@@ -26,7 +26,7 @@ export function CreationInput() {
                 <button onClick={handlePrevProcess}>Prev</button>
                 {processId < processes.length - 1 
                     ? <button onClick={handleNextProcess}>Next</button>
-                    : <button onClick={handleSubmit}>Submit</button>}
+                    : <button className="submit" onClick={handleSubmit}>Submit</button>}
             </div>
         </div>
     )
@@ -48,25 +48,26 @@ function GeneralForm() {
 }
 
 function EductionForm() {
+    const date = new Date()
     return (
         <>
         <h2>Education Information</h2>
-        <form action="">
-            <InputAndLabel label={"School name"} id={"schoolname"} name={"userschoolname"}/>
-            <InputAndLabel label={"Title"} id={"title"} name={"usertitle"}/>
-            <div>
-                <InputAndLabel label={"Studying started(year): "} id={"studystart"} name={"userstudystart"}/>
-                <InputAndLabel label={"Ended(year): "} id={"studyend"} name={"userstudyend"}/>
+        <form className="edu-form" action="">
+            <InputAndLabel label={"School name: "} id={"schoolname"} name={"userschoolname"}/>
+            <InputAndLabel label={"Title: "} id={"title"} name={"usertitle"}/>
+            <div className="study-years-div">
+                <InputAndLabel min={"1900"} max={date.getFullYear()} type="number" label={"Studying started(year): "} id={"studystart"} name={"userstudystart"}/>
+                <InputAndLabel min={"1900"} max={date.getFullYear()} type="number" label={"Ended(year): "} id={"studyend"} name={"userstudyend"}/>
             </div>
         </form>
         </>
     )
 }
 
-function InputAndLabel({id, type='text', name, label, className="", chlClassName, divide=false}) {
+function InputAndLabel({id, type='text', name, label, className="", chlClassName, divide=false, min, max}) {
     const LabelInput = () => <>
         {label && <label className={chlClassName} htmlFor={id}>{label}</label>}
-        <input className={chlClassName} type={type} name={name} id={id}/>
+        <input className={chlClassName} type={type} name={name} id={id} min={min} max={max}/>
     </>
 
     return !divide ? (
