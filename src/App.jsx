@@ -33,11 +33,11 @@ function App() {
           handleCvToggle()
           handleFormToggle()
         }} className='submit' disabled={formOpen}>Add CV</button>}
-        {cvPresent && <button disabled={formOpen} onClick={handleCvToggle} >Edit</button>}
+        {cvPresent && <button disabled={formOpen} onClick={handleFormToggle} >Edit</button>}
         {cvPresent && <button disabled={formOpen} onClick={resetCv} className='delete'>Delete</button>}
       </div>
       <Cv values={values}/>
-      {formOpen && <CreationInput callBack={handleValues} values={values}/>}
+      {formOpen && <CreationInput callBack={handleValues} initVals={values}/>}
     </div>
   )
 }
