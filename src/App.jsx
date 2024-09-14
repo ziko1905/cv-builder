@@ -13,8 +13,6 @@ function App() {
   }
 
   function handleFormToggle() {
-    if (((values) => {
-      !values})(values)) handleCvToggle()
     setFormOpen(!formOpen)
   }
 
