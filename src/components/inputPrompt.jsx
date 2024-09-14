@@ -95,11 +95,20 @@ function WorkForm({callBacks, values}) {
     const [workId, setWorkId] = useState()
     const [nextId, setNextId] = useState(0)
     const experiences = values.work;
+    let workElements = [];
+    for (const key in values.work) {
+        workElements.push(<WorkUnit editCallback={() => handleWorkId(key)} key={key} {...values.work[key]}/>)
+    }
 
     function handleAdding() {
         setUnitCreation(true)
         setNextId((nextId) => nextId+1)
         setWorkId(nextId)
+    }
+
+    function handleWorkId(id) {
+        setUnitCreation(true)
+        setWorkId(id)
     }
 
     function handleCancel() {
@@ -109,7 +118,7 @@ function WorkForm({callBacks, values}) {
     function handleSubmit(e, callBack, id) {
         e.preventDefault()
         const formData = Object.fromEntries(new FormData(e.target))
-        formData["workTime"] = getYearFromMonths(formData["workTime"]) 
+        formData["workTimeString"] = getYearFromMonths(formData["workTime"]) 
         experiences[id] = formData;
         callBack(e, experiences)
         handleCancel()
@@ -125,22 +134,22 @@ function WorkForm({callBacks, values}) {
             </div>
             <div className="experience-div">
                 {/* Needs changing bcs of new feator of editing and deleting work, index cant be passed as key */}
-                {Object.values(values.work).map((value, key) => <WorkUnit editCallback={(e) => handleSubmit(e, callBacks.submitCallback, key)} key={key} {...value}/>)}
+                {workElements}
             </div>
         </>
     )
 }
 
 function UnitCreation({cancelCallback, submitCallback, workId, work}) {
-    console.log()
+    console.log(work[workId] ? work[workId].company : undefined)
     return (
         <form onSubmit={submitCallback} className="unit-div">
             <h3 className="grid-wide">Add work experience</h3>
-            <InputAndLabel value={work[workId] ? work[workId].company : undefined} divide={true} label={"Company name: "} name={`company`} id={`company`}/>
-            <InputAndLabel value={work[workId] ? work[workId].position : undefined} divide={true} label={"Position in company: "} name={`position`} id={`position`}/>
-            <InputAndLabel value={work[workId] ? work[workId].workTime : undefined} divide={true} label={"Employment time(in months): "} name={`workTime`} id={`work-time`}/>
+            <InputAndLabel defaultValue={work[workId] ? work[workId].company : undefined} divide={true} label={"Company name: "} name={`company`} id={`company`}/>
+            <InputAndLabel defaultValue={work[workId] ? work[workId].position : undefined} divide={true} label={"Position in company: "} name={`position`} id={`position`}/>
+            <InputAndLabel defaultValue={work[workId] ? work[workId].workTime : undefined} divide={true} label={"Employment time(in months): "} name={`workTime`} id={`work-time`}/>
             <label htmlFor={`workDesc`}>Job description: </label>
-            <textarea value={work[workId] ? work[workId].workTime : undefined} name={`workDesc`} id={`work-desc`}></textarea>
+            <textarea defaultValue={work[workId] ? work[workId].workDesc : undefined} name={`workDesc`} id={`work-desc`}></textarea>
             <div className="buttons-div">
                 <button onClick={cancelCallback} className="cancel">Cancel</button>
                 <button type="submit" className="submit">Submit</button>
@@ -149,35 +158,35 @@ function UnitCreation({cancelCallback, submitCallback, workId, work}) {
     )
 }
 
-function WorkUnit({company, position, workTime, workDesc}) {
+function WorkUnit({company, position, workTimeString, workDesc, editCallback}) {
     return (
         <div className="work-unit">
             <h4>{company}</h4>
-            <h6>{position}, {workTime}</h6>
+            <h6>{position}, {workTimeString}</h6>
             {!!workDesc && <p>{workDesc}</p>}
             <div className="buttons-div">
-                <button className="cancel">Edit</button>
+                <button onClick={editCallback} className="cancel">Edit</button>
                 <button className="delete">Delete</button>
             </div>
         </div>
     )
 }
 
-function InputAndLabel({id, type='text', name, label, className="", onChange, chlClassName, divide=false, min, max, value}) {
+function InputAndLabel({id, type='text', name, label, className="", onChange, chlClassName, divide=false, min, max, defaultValue}) {
     return !divide ? (
         <div className={className + " " + "input-div"}>
-            <LabelInput id={id} type={type} name={name} label={label} onChange={onChange} chlClassName={chlClassName} min={min} max={max} value={value}/>
+            <LabelInput id={id} type={type} name={name} label={label} onChange={onChange} chlClassName={chlClassName} min={min} max={max} defaultValue={defaultValue}/>
         </div>
     ) : (
-        <LabelInput id={id} type={type} name={name} label={label} onChange={onChange} chlClassName={chlClassName} min={min} max={max} value={value}/>
+        <LabelInput id={id} type={type} name={name} label={label} onChange={onChange} chlClassName={chlClassName} min={min} max={max} defaultValue={defaultValue}/>
     )
 }
 
-function LabelInput({id, type, name, label, onChange, chlClassName, min, max, value}) {
+function LabelInput({id, type, name, label, onChange, chlClassName, min, max, defaultValue}) {
     return (
         <>
             {label && <label className={chlClassName} htmlFor={id}>{label}</label>}
-            <input onChange={onChange} value={value} className={chlClassName} type={type} name={name} id={id} min={min} max={max}/>
+            <input onChange={onChange} defaultValue={defaultValue} className={chlClassName} type={type} name={name} id={id} min={min} max={max}/>
         </>
     )
 }
