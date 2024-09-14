@@ -109,7 +109,7 @@ function WorkForm({callBacks, values}) {
     function handleSubmit(e, callBack, id) {
         e.preventDefault()
         const formData = Object.fromEntries(new FormData(e.target))
-        formData["work-time"] = getYearFromMonths(formData["work-time"]) 
+        formData["workTime"] = getYearFromMonths(formData["workTime"]) 
         experiences[id] = formData;
         callBack(e, experiences)
         handleCancel()
@@ -124,7 +124,8 @@ function WorkForm({callBacks, values}) {
                 <div onClick={handleAdding} className="add-button-div"><button className="add-button">Add Experience</button></div>
             </div>
             <div className="experience-div">
-                {Object.values(values.work).map((value, key) => <WorkUnit editCallback={(e) => handleSubmit(e, callBack.submitCallback)} key={key} {...value}/>)}
+                {/* Needs changing bcs of new feator of editing and deleting work, index cant be passed as key */}
+                {Object.values(values.work).map((value, key) => <WorkUnit editCallback={(e) => handleSubmit(e, callBacks.submitCallback, key)} key={key} {...value}/>)}
             </div>
         </>
     )
