@@ -65,7 +65,7 @@ function GeneralForm({callBacks, values}) {
                 <InputAndLabel {...callBacks} value={values.lastname} label={"Last Name: "} id="lastname" name="userlastname"/>
                 <InputAndLabel {...callBacks} value={values.birthdate} chlClassName={"grid-wide"} divide={true} label={"Date of birth: "} type="date" id="birthdate" name="userbirthdate"/>
                 <InputAndLabel {...callBacks} value={values.email} className={"grid-wide"} label={"Email: "} type="email" id="email" name="useremail"/>
-                <InputAndLabel {...callBacks} value={values.phone} className={"grid-wide"} label={"Phone Number: "} type="number" id="phone" name="userphone"/>
+                <InputAndLabel {...callBacks} value={values.phone} className={"grid-wide"} label={"Phone Number: "} type="tel" id="phone" name="userphone"/>
             </form>
         </>
     )
