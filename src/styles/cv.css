@@ -1,0 +1,8 @@
+.cv {
+  height: 80vh;
+  /* 7 / 10 is roughly ration of A4 paper */
+  width: calc((7 / 10) * 80vh);
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 6px -3px;
+  margin: 10vh auto;
+}
