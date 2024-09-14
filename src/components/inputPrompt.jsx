@@ -33,7 +33,7 @@ export function CreationInput({initVals, submitCallback, cancelCallback}) {
     }
 
     function handleSubmit() {
-        callBack(values)
+        submitCallback(values)
     }
 
     return (
@@ -49,7 +49,7 @@ export function CreationInput({initVals, submitCallback, cancelCallback}) {
                 <button onClick={handlePrevProcess}>Prev</button>
                 {processId < processes.length - 1 
                     ? <button onClick={handleNextProcess}>Next</button>
-                    : <button className="submit" onClick={submitCallback}>Submit</button>}
+                    : <button className="submit" onClick={handleSubmit}>Submit</button>}
             </div>
             <button onClick={cancelCallback} className="cancel form-cancel">Cancel</button>
         </div>

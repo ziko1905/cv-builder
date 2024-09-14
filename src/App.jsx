@@ -18,6 +18,7 @@ function App() {
   }
 
   function handleFormToggle() {
+    console.log(formOpen)
     setFormOpen(!formOpen)
   }
 
@@ -37,7 +38,7 @@ function App() {
         {cvPresent && <button disabled={formOpen} onClick={resetCv} className='delete'>Delete</button>}
       </div>
       <Cv values={values}/>
-      {formOpen && <CreationInput cancelCallBack={handleFormToggle} submitCallBack={handleValues} initVals={values}/>}
+      {formOpen && <CreationInput cancelCallback={handleFormToggle} submitCallback={handleValues} initVals={values}/>}
     </div>
   )
 }
