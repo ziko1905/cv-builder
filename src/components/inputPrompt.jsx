@@ -56,32 +56,33 @@ export function CreationInput() {
 }
 
 function GeneralForm({callBacks, values}) {
-
+    console.log(values)
     return (
         <>
             <h2>General Information</h2>
             <form action="">
-                <InputAndLabel {...callBacks} value={values.firstname} label={"First Name: "} id="firstname" name="user-first-name"/>
-                <InputAndLabel {...callBacks} value={values.lastname} label={"Last Name: "} id="lastname" name="userlastname"/>
-                <InputAndLabel {...callBacks} value={values.birthdate} chlClassName={"grid-wide"} divide={true} label={"Date of birth: "} type="date" id="birthdate" name="userbirthdate"/>
-                <InputAndLabel {...callBacks} value={values.email} className={"grid-wide"} label={"Email: "} type="email" id="email" name="useremail"/>
-                <InputAndLabel {...callBacks} value={values.phone} className={"grid-wide"} label={"Phone Number: "} type="tel" id="phone" name="userphone"/>
+                <InputAndLabel {...callBacks} defaultValue={values.firstname} label={"First Name: "} id="firstname" name="user-first-name"/>
+                <InputAndLabel {...callBacks} defaultValue={values.lastname} label={"Last Name: "} id="lastname" name="userlastname"/>
+                <InputAndLabel {...callBacks} defaultValue={values.birthdate} chlClassName={"grid-wide"} divide={true} label={"Date of birth: "} type="date" id="birthdate" name="userbirthdate"/>
+                <InputAndLabel {...callBacks} defaultValue={values.email} className={"grid-wide"} label={"Email: "} type="email" id="email" name="useremail"/>
+                <InputAndLabel {...callBacks} defaultValue={values.phone} className={"grid-wide"} label={"Phone Number: "} type="tel" id="phone" name="userphone"/>
             </form>
         </>
     )
 }
 
 function EductionForm({callBacks, values}) {
+    console.log(values)
     const date = new Date()
     return (
         <>
         <h2>Education Information</h2>
         <form className="edu-form" action="">
-            <InputAndLabel {...callBacks} value={values.schoolname} label={"School name: "} id={"schoolname"} name={"userschoolname"}/>
-            <InputAndLabel {...callBacks} value={values.title} label={"Title: "} id={"title"} name={"usertitle"}/>
+            <InputAndLabel {...callBacks} defaultValue={values.schoolname} label={"School name: "} id={"schoolname"} name={"userschoolname"}/>
+            <InputAndLabel {...callBacks} defaultValue={values.title} label={"Title: "} id={"title"} name={"usertitle"}/>
             <div className="study-years-div">
-                <InputAndLabel {...callBacks} value={values.studystart} min={"1900"} max={date.getFullYear()} type="number" label={"Studying started(year): "} id={"studystart"} name={"userstudystart"}/>
-                <InputAndLabel {...callBacks} value={values.studyend} min={"1900"} max={date.getFullYear()} type="number" label={"Ended(year): "} id={"studyend"} name={"userstudyend"}/>
+                <InputAndLabel {...callBacks} defaultValue={values.studystart} min={"1900"} max={date.getFullYear()} type="number" label={"Studying started(year): "} id={"studystart"} name={"userstudystart"}/>
+                <InputAndLabel {...callBacks} defaultValue={values.studyend} min={"1900"} max={date.getFullYear()} type="number" label={"Ended(year): "} id={"studyend"} name={"userstudyend"}/>
             </div>
         </form>
         </>
@@ -89,6 +90,7 @@ function EductionForm({callBacks, values}) {
 }
 
 function WorkForm({callBacks, values}) {
+    console.log(values)
     const [unitCreationDisplay, setUnitCreation] = useState(false)
     const [workId, setWorkId] = useState()
     const [nextId, setNextId] = useState(0)

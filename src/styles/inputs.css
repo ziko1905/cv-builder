@@ -5,6 +5,7 @@
   align-content: start;
   gap: 1rem;
 
+  background-color: white;
   position: relative;
   min-height: 35rem;
   max-height: 35rem;
@@ -127,6 +128,7 @@ button:active {
 
 .experience-div {
   min-width: 80%;
+  max-width: 80%;
   display: grid;
   align-self: start;
   gap: 1rem 0;
