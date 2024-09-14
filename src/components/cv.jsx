@@ -4,6 +4,8 @@ export function Cv({values}) {
         <div className="cv">
             <BasicInfo values={values}/>
             <hr />
+            <EducationInfo values={values}/>
+            <hr />
         </div>
     )
 }
@@ -21,6 +23,19 @@ function BasicInfo({values}) {
                 <p>Email: <a href={mailTo}>{values.email}</a></p>
                 <p>Phone: <a href="">{values.phone}</a></p>
             </div>
+        </div>
+    )
+}
+
+function EducationInfo({values}) {
+    return (
+        <div className="info education">
+            <h3>Education: </h3>
+            <div>
+                <p>School name: {values.schoolname}</p>
+                <p>Title achieved: {values.title}</p>
+            </div>
+            <p>Study period: {values.studystart} - {values.studyend}</p>
         </div>
     )
 }
