@@ -2,8 +2,8 @@ import { useState } from "react";
 import "../styles/inputs.css"
 import { getYearFromMonths } from "../general";
 
-export function CreationInput() {
-    const [values, setValues] = useState({firstname: "", lastname: "", birthdate: "", email: "", phone: "", schoolname: "", title: "", studystart: "", studyend: "", work: {}})
+export function CreationInput({initVals, callBack}) {
+    const [values, setValues] = useState(initVals ? initVals : {firstname: "", lastname: "", birthdate: "", email: "", phone: "", schoolname: "", title: "", studystart: "", studyend: "", work: {}})
     const processes = [GeneralForm, EductionForm, WorkForm]
     const callBacks = [{onChange: handleValues}, {onChange: handleValues}, {submitCallback: handleWorkSubmit}]
     const [processId, setProcessId] = useState(0);
@@ -33,7 +33,7 @@ export function CreationInput() {
     }
 
     function handleSubmit() {
-
+        callBack(values)
     }
 
     return (

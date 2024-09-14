@@ -1,5 +1,6 @@
 import "../styles/cv.css"
 export function Cv({values}) {
+    if (!values) return <div className="cv" />
     return (
         <div className="cv">
             <div className="cv-content">

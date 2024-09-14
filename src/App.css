@@ -1,3 +1,21 @@
 :root {
   background-color: rgb(252, 232, 255);
 }
+
+.main {
+  display: grid;
+  justify-content: center;
+  gap: 1rem;
+
+  margin: 4rem auto;
+}
+
+.operation-btns {
+  display: grid;
+  justify-self: start;
+  min-height: 3rem;
+}
+
+.operation-btns button {
+  align-self: end;
+}
