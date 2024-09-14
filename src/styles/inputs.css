@@ -93,18 +93,18 @@ button:active {
   align-self: flex-end;
 }
 
-.buttons-div button.submit,
+button.submit,
 .add-button {
   background-color: rgb(72, 187, 72);
   border-bottom-color: rgb(52, 134, 52);
 }
 
-.buttons-div button.cancel {
+button.cancel {
   background-color: #9d9d9d;
   border-bottom-color: rgb(88, 88, 88);
 }
 
-.buttons-div button.delete {
+button.delete {
   background-color: rgb(255, 113, 113);
   border-bottom-color: rgb(126, 60, 60);
 }

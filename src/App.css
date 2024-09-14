@@ -12,7 +12,9 @@
 
 .operation-btns {
   display: grid;
+  grid-auto-flow: column;
   justify-self: start;
+  gap: 0.5rem;
   min-height: 3rem;
 }
 

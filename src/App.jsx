@@ -32,9 +32,9 @@ function App() {
         {!cvPresent && <button onClick={() => {
           handleCvToggle()
           handleFormToggle()
-        }} className='post' disabled={formOpen}>Add CV</button>}
-        {cvPresent && <button disabled={formOpen} onClick={handleCvToggle} className='post'>Edit</button>}
-        {cvPresent && <button disabled={formOpen} onClick={resetCv} className='remove'>Delete</button>}
+        }} className='submit' disabled={formOpen}>Add CV</button>}
+        {cvPresent && <button disabled={formOpen} onClick={handleCvToggle} >Edit</button>}
+        {cvPresent && <button disabled={formOpen} onClick={resetCv} className='delete'>Delete</button>}
       </div>
       <Cv values={values}/>
       {formOpen && <CreationInput callBack={handleValues} values={values}/>}
