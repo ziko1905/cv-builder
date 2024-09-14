@@ -46,7 +46,7 @@ export function CreationInput({initVals, submitCallback, cancelCallback}) {
             </div>
             <CurrFrom callBacks={currCallback} values={values}/>
             <div className="buttons-div">
-                <button onClick={handlePrevProcess}>Prev</button>
+                {processId !== 0 && <button onClick={handlePrevProcess}>Prev</button>}
                 {processId < processes.length - 1 
                     ? <button onClick={handleNextProcess}>Next</button>
                     : <button className="submit" onClick={handleSubmit}>Submit</button>}
