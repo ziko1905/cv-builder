@@ -57,7 +57,6 @@ export function CreationInput({initVals, submitCallback, cancelCallback}) {
 }
 
 function GeneralForm({callBacks, values}) {
-    console.log(values)
     return (
         <>
             <h2>General Information</h2>
@@ -73,7 +72,6 @@ function GeneralForm({callBacks, values}) {
 }
 
 function EductionForm({callBacks, values}) {
-    console.log(values)
     const date = new Date()
     return (
         <>
@@ -91,7 +89,6 @@ function EductionForm({callBacks, values}) {
 }
 
 function WorkForm({callBacks, values}) {
-    console.log(values)
     const [unitCreationDisplay, setUnitCreation] = useState(false)
     const [workId, setWorkId] = useState()
     const [nextId, setNextId] = useState(0)

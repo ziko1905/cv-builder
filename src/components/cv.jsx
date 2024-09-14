@@ -25,7 +25,7 @@ function BasicInfo({values}) {
             <span>{`${birthDate.getDate()}. ${month[birthDate.getMonth()]}, ${birthDate.getFullYear()}`}</span>
             <div>
                 <p>Email: <a href={mailTo}>{values.email}</a></p>
-                <p>Phone: <a href="">{values.phone}</a></p>
+                <p>Phone: <a href={tel}>{values.phone}</a></p>
             </div>
         </div>
     )
@@ -45,12 +45,10 @@ function EducationInfo({values}) {
 }
 
 function WorkInfo({values}) {
-    console.log("Here", values.work)
     return (
         <div className="work info">
             <h3>Experience: </h3>
             {Object.entries(values.work).map(([key, value]) => {
-                console.log(key, value)
                 return <WorkSection key={key} work={value} />
             })}
         </div>

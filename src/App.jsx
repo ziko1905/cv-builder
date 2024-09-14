@@ -4,13 +4,8 @@ import './App.css'
 import { CreationInput } from './components/inputPrompt';
 
 function App() {
-  const [cvPresent, setCvPresent] = useState(false);
   const [values, setValues] = useState(null)
   const [formOpen, setFormOpen] = useState(false)
-
-  function handleCvToggle() {
-    setCvPresent(!cvPresent)
-  }
 
   function handleValues(newValues) {
     setValues(newValues)
@@ -18,24 +13,23 @@ function App() {
   }
 
   function handleFormToggle() {
-    console.log(formOpen)
+    if (((values) => {
+      !values})(values)) handleCvToggle()
     setFormOpen(!formOpen)
   }
 
   function resetCv() {
     setValues(null)
-    handleCvToggle()
   }
   
   return (
     <div className="main">
       <div className='operation-btns'>
-        {!cvPresent && <button onClick={() => {
-          handleCvToggle()
+        {!values && <button onClick={() => {
           handleFormToggle()
         }} className='submit' disabled={formOpen}>Add CV</button>}
-        {cvPresent && <button disabled={formOpen} onClick={handleFormToggle} >Edit</button>}
-        {cvPresent && <button disabled={formOpen} onClick={resetCv} className='delete'>Delete</button>}
+        {values && <button disabled={formOpen} onClick={handleFormToggle} >Edit</button>}
+        {values && <button disabled={formOpen} onClick={resetCv} className='delete'>Delete</button>}
       </div>
       <Cv values={values}/>
       {formOpen && <CreationInput cancelCallback={handleFormToggle} submitCallback={handleValues} initVals={values}/>}
