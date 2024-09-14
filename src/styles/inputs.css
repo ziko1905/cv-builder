@@ -1,6 +1,6 @@
 .input-prompt {
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto auto 1fr;
   justify-items: center;
   align-content: start;
   gap: 1rem;
@@ -15,7 +15,7 @@
   margin-left: auto;
   margin-right: auto;
   border: 5px solid mediumseagreen;
-  border-top-width: 15px;
+  border-top-width: 10px;
   border-radius: 20px;
   max-width: 50rem;
 }
@@ -88,7 +88,6 @@ button {
 }
 
 button:active {
-  background-color: rgb(59, 103, 168);
   border-bottom: none;
   align-self: flex-end;
 }
@@ -99,15 +98,14 @@ button:active {
   border-bottom-color: rgb(52, 134, 52);
 }
 
-.buttons-div button.submit:active,
-.add-button:active {
-  background-color: rgb(52, 134, 52);
-  border-bottom: none;
-}
-
 .buttons-div button.cancel {
   background-color: #9d9d9d;
   border-bottom-color: rgb(88, 88, 88);
+}
+
+.buttons-div button.delete {
+  background-color: rgb(255, 113, 113);
+  border-bottom-color: rgb(126, 60, 60);
 }
 
 .study-years-div {
@@ -143,6 +141,7 @@ button:active {
   gap: 1rem 0.7rem;
 
   position: absolute;
+  z-index: 1;
   top: 6rem;
   font-size: 1rem;
   background-color: white;
@@ -173,6 +172,7 @@ button:active {
 }
 
 .work-unit {
+  position: relative;
   background-color: #dbdbdb;
   padding: 0.7rem;
   grid-column: 1 / -1;
@@ -192,4 +192,29 @@ button:active {
 .work-unit h6,
 .work-unit p {
   font-size: 0.8em;
+}
+
+.work-unit .buttons-div {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-content: start;
+
+  top: 0.2em;
+  right: 0.4em;
+  bottom: 0;
+  font-size: 0.7em;
+}
+
+.progress-bar {
+  display: flex;
+  min-height: 5px;
+  min-width: 100%;
+}
+
+.progress-bar div {
+  flex: 1;
+}
+
+.progress-bar div.act {
+  background-color: mediumseagreen;
 }

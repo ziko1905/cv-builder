@@ -40,6 +40,12 @@ export function CreationInput() {
 
     return (
         <div className={["input-prompt", "creation-input"].join(" ")}>
+            <div className="progress-bar">
+                {processes.map((value, index) => {
+                    if (index == processId) return <div key={index} className="act"></div>
+                    else return  <div key={index} className="dis"></div>
+                })}
+            </div>
             <CurrFrom callBacks={currCallback} values={values}/>
             <div className="buttons-div">
                 <button onClick={handlePrevProcess}>Prev</button>
@@ -86,51 +92,54 @@ function EductionForm({callBacks, values}) {
 
 function WorkForm({callBacks, values}) {
     const [unitCreationDisplay, setUnitCreation] = useState(false)
-    const [workId, setWorkId] = useState(-1)
+    const [workId, setWorkId] = useState()
+    const [nextId, setNextId] = useState(0)
     const experiences = values.work;
 
     function handleAdding() {
         setUnitCreation(true)
-        setWorkId(workId+1)
+        setNextId((nextId) => nextId+1)
+        setWorkId(nextId)
     }
 
     function handleCancel() {
         setUnitCreation(false)
     }
 
-    function handleSubmit(e, callBack) {
+    function handleSubmit(e, callBack, id) {
         e.preventDefault()
         const formData = Object.fromEntries(new FormData(e.target))
         formData["work-time"] = getYearFromMonths(formData["work-time"]) 
-        experiences[workId] = formData;
+        experiences[id] = formData;
         callBack(e, experiences)
         handleCancel()
     }
 
     return (
         <>
-            {unitCreationDisplay && <UnitCreation workId={workId} submitCallback={(e) => handleSubmit(e, callBacks.submitCallback)} cancelCallback={handleCancel}/>}
+            {unitCreationDisplay && <UnitCreation work={values.work} workId={workId} submitCallback={(e) => handleSubmit(e, callBacks.submitCallback, workId)} cancelCallback={handleCancel}/>}
             <h2>Work Information</h2>
             <div className="work-header">
                 <h3>Experience:</h3>
                 <div onClick={handleAdding} className="add-button-div"><button className="add-button">Add Experience</button></div>
             </div>
             <div className="experience-div">
-                {Object.values(values.work).map((value, key) => <WorkUnit key={key} {...value}/>)}
+                {Object.values(values.work).map((value, key) => <WorkUnit editCallback={(e) => handleSubmit(e, callBack.submitCallback)} key={key} {...value}/>)}
             </div>
         </>
     )
 }
 
-function UnitCreation({cancelCallback, submitCallback}) {
+function UnitCreation({cancelCallback, submitCallback, workId, work}) {
+    console.log()
     return (
         <form onSubmit={submitCallback} className="unit-div">
             <h3 className="grid-wide">Add work experience</h3>
-            <InputAndLabel divide={true} label={"Company name: "} name={`company`} id={`company`}/>
-            <InputAndLabel divide={true} label={"Position in company: "} name={`position`} id={`position`}/>
-            <InputAndLabel divide={true} label={"Employment time(in months): "} name={`workTime`} id={`work-time`}/>
+            <InputAndLabel value={work[workId] ? work[workId].company : undefined} divide={true} label={"Company name: "} name={`company`} id={`company`}/>
+            <InputAndLabel value={work[workId] ? work[workId].position : undefined} divide={true} label={"Position in company: "} name={`position`} id={`position`}/>
+            <InputAndLabel value={work[workId] ? work[workId].workTime : undefined} divide={true} label={"Employment time(in months): "} name={`workTime`} id={`work-time`}/>
             <label htmlFor={`workDesc`}>Job description: </label>
-            <textarea name={`workDesc`} id={`work-desc`}></textarea>
+            <textarea value={work[workId] ? work[workId].workTime : undefined} name={`workDesc`} id={`work-desc`}></textarea>
             <div className="buttons-div">
                 <button onClick={cancelCallback} className="cancel">Cancel</button>
                 <button type="submit" className="submit">Submit</button>
@@ -145,6 +154,10 @@ function WorkUnit({company, position, workTime, workDesc}) {
             <h4>{company}</h4>
             <h6>{position}, {workTime}</h6>
             {!!workDesc && <p>{workDesc}</p>}
+            <div className="buttons-div">
+                <button className="cancel">Edit</button>
+                <button className="delete">Delete</button>
+            </div>
         </div>
     )
 }
