@@ -1,3 +1,7 @@
+:root {
+  --primary-color: rgb(86, 155, 211);
+}
+
 .cv {
   height: 80vh;
   /* 7 / 10 is roughly ration of A4 paper */
@@ -5,4 +9,20 @@
   background-color: rgb(255, 255, 255);
   box-shadow: 0 0 6px -3px;
   margin: 10vh auto;
+  padding: 2rem;
+  font-size: 0.8rem;
+}
+
+hr {
+  border-color: var(--primary-color);
+}
+
+.basic h1 {
+  margin-bottom: 0;
+  font-size: 1.5em;
+}
+
+.basic div {
+  display: grid;
+  grid-auto-flow: column;
 }
