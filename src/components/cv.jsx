@@ -2,10 +2,13 @@ import "../styles/cv.css"
 export function Cv({values}) {
     return (
         <div className="cv">
-            <BasicInfo values={values}/>
-            <hr />
-            <EducationInfo values={values}/>
-            <hr />
+            <div className="cv-content">
+                <BasicInfo values={values}/>
+                <hr />
+                <EducationInfo values={values}/>
+                <hr />
+                <WorkInfo values={values}/>
+            </div>
         </div>
     )
 }
@@ -36,6 +39,29 @@ function EducationInfo({values}) {
                 <p>Title achieved: {values.title}</p>
             </div>
             <p>Study period: {values.studystart} - {values.studyend}</p>
+        </div>
+    )
+}
+
+function WorkInfo({values}) {
+    console.log("Here", values.work)
+    return (
+        <div className="work info">
+            <h3>Experience: </h3>
+            {Object.entries(values.work).map(([key, value]) => {
+                console.log(key, value)
+                return <WorkSection key={key} work={value} />
+            })}
+        </div>
+    )
+}
+
+function WorkSection({work}) {
+    return (
+        <div className="work-section">
+            <h4>{work.company}, for {work.workTimeString}</h4>
+            <p>Position: {work.position}</p>
+            <p>{work.workDesc}</p>
         </div>
     )
 }
