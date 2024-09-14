@@ -97,7 +97,7 @@ function WorkForm({callBacks, values}) {
     const experiences = values.work;
     let workElements = [];
     for (const key in values.work) {
-        workElements.push(<WorkUnit editCallback={() => handleWorkId(key)} key={key} {...values.work[key]}/>)
+        workElements.push(<WorkUnit deleteCallback={(e) => handleDelete(e, key)} editCallback={() => handleWorkId(key)} key={key} {...values.work[key]}/>)
     }
 
     function handleAdding() {
@@ -122,6 +122,12 @@ function WorkForm({callBacks, values}) {
         experiences[id] = formData;
         callBack(e, experiences)
         handleCancel()
+    }
+
+    function handleDelete(e, id) {
+        console.log("I am getting called")
+        delete experiences[id]
+        callBacks.submitCallback(e, experiences)
     }
 
     return (
@@ -158,7 +164,7 @@ function UnitCreation({cancelCallback, submitCallback, workId, work}) {
     )
 }
 
-function WorkUnit({company, position, workTimeString, workDesc, editCallback}) {
+function WorkUnit({company, position, workTimeString, workDesc, editCallback, deleteCallback}) {
     return (
         <div className="work-unit">
             <h4>{company}</h4>
@@ -166,7 +172,7 @@ function WorkUnit({company, position, workTimeString, workDesc, editCallback}) {
             {!!workDesc && <p>{workDesc}</p>}
             <div className="buttons-div">
                 <button onClick={editCallback} className="cancel">Edit</button>
-                <button className="delete">Delete</button>
+                <button onClick={deleteCallback} className="delete">Delete</button>
             </div>
         </div>
     )
