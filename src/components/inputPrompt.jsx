@@ -3,7 +3,7 @@ import "../styles/inputs.css"
 import { getYearFromMonths } from "../general";
 
 export function CreationInput() {
-    const [values, setValues] = useState({firstname: "", lastname: "", birthdate: "", email: "", phone: "", shoolname: "", title: "", studystart: "", studyend: "", work: {}})
+    const [values, setValues] = useState({firstname: "", lastname: "", birthdate: "", email: "", phone: "", schoolname: "", title: "", studystart: "", studyend: "", work: {}})
     const processes = [GeneralForm, EductionForm, WorkForm]
     const callBacks = [{onChange: handleValues}, {onChange: handleValues}, {submitCallback: handleWorkSubmit}]
     const [processId, setProcessId] = useState(0);
@@ -27,10 +27,8 @@ export function CreationInput() {
 
     function handleWorkSubmit(e, work) {
         e.preventDefault()
-        console.log("Submitting...")
         const newValues = {...values}
         newValues.work = work
-        console.log(newValues)
         setValues(newValues)
     }
 
@@ -125,7 +123,6 @@ function WorkForm({callBacks, values}) {
     }
 
     function handleDelete(e, id) {
-        console.log("I am getting called")
         delete experiences[id]
         callBacks.submitCallback(e, experiences)
     }
@@ -147,7 +144,6 @@ function WorkForm({callBacks, values}) {
 }
 
 function UnitCreation({cancelCallback, submitCallback, workId, work}) {
-    console.log(work[workId] ? work[workId].company : undefined)
     return (
         <form onSubmit={submitCallback} className="unit-div">
             <h3 className="grid-wide">Add work experience</h3>
