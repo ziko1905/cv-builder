@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/inputs.css"
 import { getYearFromMonths } from "../general";
 
-export function CreationInput({initVals, callBack}) {
+export function CreationInput({initVals, submitCallback, cancelCallback}) {
     const [values, setValues] = useState(initVals ? initVals : {firstname: "", lastname: "", birthdate: "", email: "", phone: "", schoolname: "", title: "", studystart: "", studyend: "", work: {}})
     const processes = [GeneralForm, EductionForm, WorkForm]
     const callBacks = [{onChange: handleValues}, {onChange: handleValues}, {submitCallback: handleWorkSubmit}]
@@ -49,8 +49,9 @@ export function CreationInput({initVals, callBack}) {
                 <button onClick={handlePrevProcess}>Prev</button>
                 {processId < processes.length - 1 
                     ? <button onClick={handleNextProcess}>Next</button>
-                    : <button className="submit" onClick={handleSubmit}>Submit</button>}
+                    : <button className="submit" onClick={submitCallback}>Submit</button>}
             </div>
+            <button onClick={cancelCallback} className="cancel form-cancel">Cancel</button>
         </div>
     )
 }

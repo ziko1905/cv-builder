@@ -221,3 +221,10 @@ button.delete {
 .progress-bar div.act {
   background-color: mediumseagreen;
 }
+
+.form-cancel {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  font-size: 1.3em;
+}

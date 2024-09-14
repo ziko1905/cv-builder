@@ -37,7 +37,7 @@ function App() {
         {cvPresent && <button disabled={formOpen} onClick={resetCv} className='delete'>Delete</button>}
       </div>
       <Cv values={values}/>
-      {formOpen && <CreationInput callBack={handleValues} initVals={values}/>}
+      {formOpen && <CreationInput cancelCallBack={handleFormToggle} submitCallBack={handleValues} initVals={values}/>}
     </div>
   )
 }
