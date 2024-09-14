@@ -6,15 +6,16 @@
   gap: 1rem;
 
   background-color: white;
-  position: relative;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
   min-height: 35rem;
   max-height: 35rem;
+  min-width: 55rem;
   margin-top: 10vh;
 }
 
 .creation-input {
-  margin-left: auto;
-  margin-right: auto;
   border: 5px solid mediumseagreen;
   border-top-width: 10px;
   border-radius: 20px;
